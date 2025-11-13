@@ -1,12 +1,13 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, BarChart, Bot, Map, ShieldCheck } from 'lucide-react';
+import { ArrowRight, BarChart, Map, ShieldCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AuraTwinLogo } from '@/components/icons';
 import { PlaceHolderImages, type ImagePlaceholder } from '@/lib/placeholder-images';
 import { useEffect, useState } from 'react';
+import { useUser } from '@/firebase';
 
 const features = [
   {
@@ -30,6 +31,7 @@ const features = [
 ];
 
 export default function LandingPage() {
+  const { user } = useUser();
   const heroImage = PlaceHolderImages.find(img => img.id === 'hero-image');
   const [year, setYear] = useState<number | null>(null);
 
@@ -45,11 +47,24 @@ export default function LandingPage() {
             <AuraTwinLogo className="h-8 w-8 text-primary" />
             <span className="text-xl font-bold tracking-tight">AuraTwin</span>
           </Link>
-          <Button asChild>
-            <Link href="/dashboard">
-              Go to Dashboard <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </Button>
+          {user ? (
+            <Button asChild>
+              <Link href="/dashboard">
+                Go to Dashboard <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          ) : (
+            <div className="flex items-center gap-4">
+              <Button variant="ghost" asChild>
+                <Link href="/login">Login</Link>
+              </Button>
+              <Button asChild>
+                <Link href="/register">
+                  Sign Up <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          )}
         </div>
       </header>
 
@@ -98,8 +113,8 @@ export default function LandingPage() {
               </p>
             </div>
             <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
-              {features.map((feature) => (
-                <Card key={feature.title} className="flex flex-col">
+              {features.map((feature, index) => (
+                <Card key={index} className="flex flex-col">
                   <CardHeader className="items-center text-center">
                     <div className="mb-4 rounded-full bg-primary/10 p-3">
                       {feature.icon}

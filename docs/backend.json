@@ -8,8 +8,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "Unique identifier for the user (maps to Firebase Auth UID).",
-          "format": "uuid"
+          "description": "Unique identifier for the user (maps to Firebase Auth UID)."
         },
         "firstName": {
           "type": "string",
@@ -23,26 +22,6 @@
           "type": "string",
           "description": "The user's email address.",
           "format": "email"
-        },
-        "address": {
-          "type": "string",
-          "description": "The user's street address."
-        },
-        "city": {
-          "type": "string",
-          "description": "The user's city."
-        },
-        "state": {
-          "type": "string",
-          "description": "The user's state."
-        },
-        "zipCode": {
-          "type": "string",
-          "description": "The user's zip code."
-        },
-        "role": {
-          "type": "string",
-          "description": "The user's role (e.g., homeowner, policymaker)."
         },
         "createdAt": {
           "type": "string",
@@ -60,11 +39,6 @@
         "firstName",
         "lastName",
         "email",
-        "address",
-        "city",
-        "state",
-        "zipCode",
-        "role",
         "createdAt",
         "updatedAt"
       ]
@@ -72,8 +46,7 @@
   },
   "auth": {
     "providers": [
-      "password",
-      "anonymous"
+      "password"
     ]
   },
   "firestore": {
@@ -85,7 +58,7 @@
           "schema": {
             "$ref": "#/backend/entities/User"
           },
-          "description": "Stores user profiles, mirroring data from Cloud SQL for potential auxiliary usage in Firebase services. Used mainly for authentication and authorization purposes. User ID is equivalent to Firebase Auth UID.",
+          "description": "Stores user profiles. User ID is equivalent to Firebase Auth UID.",
           "params": [
             {
               "name": "userId",
@@ -94,7 +67,6 @@
           ]
         }
       }
-    ],
-    "reasoning": "Given the requirement for a Cloud SQL database with PostgreSQL and TimescaleDB, Firestore will NOT be the primary data store. Firestore is only suitable for minimal auxiliary purposes, such as caching or very lightweight metadata. The core data resides in Cloud SQL and TimescaleDB based on the user's explicit instructions.\n\nTherefore, the Firestore structure reflects an auxiliary role, primarily mirroring the User data for Firebase Authentication integration, potentially supporting more flexible access control in the future, if needed.\n\n**Authorization Independence**: Authorization is based on the Firebase Auth UID. User data is stored in the `/users/{userId}` path, making it directly accessible and securable using `request.auth.uid == userId` in security rules. No `get()` calls are needed to verify ownership.\n\n**QAPs Support**: The `/users/{userId}` path structure inherently supports secure `list` operations for user-owned data. A rule can be written to allow a user to only list their own data, preventing unauthorized access to other users' data. No other collections are proposed for the specific requirements, minimizing the risk of complex QAP issues."
+    ]
   }
 }
