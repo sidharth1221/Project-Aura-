@@ -23,6 +23,7 @@ export type FormState = {
     userData?: string[];
     district?: string[];
     sensitivityLevel?: string[];
+    _form?: string[];
   };
 };
 
@@ -52,6 +53,12 @@ export async function submitAnonymizationRequest(
     });
     return { message: 'Anonymization successful.', data: result };
   } catch (error) {
-    return { message: 'An error occurred during anonymization.' };
+    const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred.';
+    return { 
+        message: 'An error occurred during anonymization.',
+        errors: {
+            _form: [errorMessage],
+        }
+    };
   }
 }

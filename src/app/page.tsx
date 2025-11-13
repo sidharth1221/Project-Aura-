@@ -1,10 +1,12 @@
+'use client';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, BarChart, Bot, Map, ShieldCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AuraTwinLogo } from '@/components/icons';
-import { PlaceHolderImages } from '@/lib/placeholder-images';
+import { PlaceHolderImages, type ImagePlaceholder } from '@/lib/placeholder-images';
+import { useEffect, useState } from 'react';
 
 const features = [
   {
@@ -29,6 +31,11 @@ const features = [
 
 export default function LandingPage() {
   const heroImage = PlaceHolderImages.find(img => img.id === 'hero-image');
+  const [year, setYear] = useState<number | null>(null);
+
+  useEffect(() => {
+    setYear(new Date().getFullYear());
+  }, []);
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -111,7 +118,7 @@ export default function LandingPage() {
 
       <footer className="bg-background py-6">
         <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
-          &copy; {new Date().getFullYear()} AuraTwin. All rights reserved.
+          &copy; {year || '...'} AuraTwin. All rights reserved.
         </div>
       </footer>
     </div>

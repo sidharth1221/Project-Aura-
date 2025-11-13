@@ -63,7 +63,11 @@ export function DistrictChart({ data }: DistrictChartProps) {
              cursor={{ fill: 'hsl(var(--secondary))' }}
              content={<ChartTooltipContent indicator="line" nameKey="name" />}
           />
-          <Bar dataKey="value" radius={[0, 4, 4, 0]} />
+          <Bar dataKey="value" radius={[0, 4, 4, 0]}>
+            {data.map((entry) => (
+                <div key={entry.name} />
+            ))}
+          </Bar>
         </BarChart>
       </ChartContainer>
     </div>

@@ -1,14 +1,12 @@
 'use client';
 
-import { useActionState, useEffect } from 'react';
+import { useActionState, useEffect, useRef } from 'react';
 import { useFormStatus } from 'react-dom';
 import { submitAnonymizationRequest, FormState } from './actions';
 import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
-  FormDescription,
-  FormField,
   FormItem,
   FormLabel,
   FormMessage,
@@ -25,16 +23,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Bot, Loader2 } from 'lucide-react';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useToast } from '@/hooks/use-toast';
-
-const FormSchema = z.object({
-  userData: z.string().min(1, 'User data is required.'),
-  district: z.string().min(1, 'District is required.'),
-  sensitivityLevel: z.enum(['low', 'medium', 'high']),
-});
 
 const defaultUserData = {
     "name": "John Doe",
@@ -47,8 +36,14 @@ function SubmitButton() {
   const { pending } = useFormStatus();
   return (
     <Button type="submit" disabled={pending} className="w-full md:w-auto">
-      {pending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-      Anonymize Data
+      {pending ? (
+        <>
+          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          Anonymizing...
+        </>
+      ) : (
+        'Anonymize Data'
+      )}
     </Button>
   );
 }
@@ -57,97 +52,78 @@ export function AnonymizeForm() {
   const initialState: FormState = { message: '' };
   const [state, formAction] = useActionState(submitAnonymizationRequest, initialState);
   const { toast } = useToast();
-
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-    defaultValues: {
-      userData: JSON.stringify(defaultUserData, null, 2),
-      district: 'Downtown',
-      sensitivityLevel: 'medium',
-    },
-  });
+  const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
     if (state.message && state.message !== 'Anonymization successful.') {
-      toast({
-        variant: 'destructive',
-        title: 'Error',
-        description: state.message,
-      });
+        const errorMessages = 
+            state.errors?.userData?.join(', ') ||
+            state.errors?.district?.join(', ') ||
+            state.errors?.sensitivityLevel?.join(', ') ||
+            state.errors?._form?.join(', ') ||
+            state.message;
+      
+        toast({
+            variant: 'destructive',
+            title: 'Error',
+            description: errorMessages,
+        });
     }
   }, [state, toast]);
 
 
   return (
     <div className="space-y-6">
-      <Form {...form}>
         <form
+            ref={formRef}
             action={formAction}
             className="space-y-6"
-            onSubmit={form.handleSubmit(() => formAction(new FormData(form.control._formValues.current)))}
         >
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <FormField
-              control={form.control}
-              name="userData"
-              render={({ field }) => (
-                <FormItem className="md:col-span-2">
-                  <FormLabel>User Data (JSON)</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      {...field}
-                      rows={10}
-                      placeholder='{ "name": "John Doe", "age": 35 }'
-                      className="font-code"
-                    />
-                  </FormControl>
-                  <FormMessage>{state.errors?.userData}</FormMessage>
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="district"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>District</FormLabel>
-                  <FormControl>
-                    <Input {...field} placeholder="e.g., Northwood" />
-                  </FormControl>
-                  <FormMessage>{state.errors?.district}</FormMessage>
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="sensitivityLevel"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Sensitivity Level</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                    name={field.name}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select a sensitivity level" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      <SelectItem value="low">Low</SelectItem>
-                      <SelectItem value="medium">Medium</SelectItem>
-                      <SelectItem value="high">High</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage>{state.errors?.sensitivityLevel}</FormMessage>
-                </FormItem>
-              )}
-            />
+            <FormItem className="md:col-span-2">
+              <FormLabel>User Data (JSON)</FormLabel>
+              <FormControl>
+                <Textarea
+                  name="userData"
+                  rows={10}
+                  defaultValue={JSON.stringify(defaultUserData, null, 2)}
+                  placeholder='{ "name": "John Doe", "age": 35 }'
+                  className="font-code"
+                />
+              </FormControl>
+              <FormMessage>{state.errors?.userData}</FormMessage>
+            </FormItem>
+
+            <FormItem>
+              <FormLabel>District</FormLabel>
+              <FormControl>
+                <Input name="district" defaultValue="Downtown" placeholder="e.g., Northwood" />
+              </FormControl>
+              <FormMessage>{state.errors?.district}</FormMessage>
+            </FormItem>
+
+            <FormItem>
+              <FormLabel>Sensitivity Level</FormLabel>
+              <Select
+                name="sensitivityLevel"
+                defaultValue="medium"
+              >
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select a sensitivity level" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="low">Low</SelectItem>
+                  <SelectItem value="medium">Medium</SelectItem>
+                  <SelectItem value="high">High</SelectItem>
+                </SelectContent>
+              </Select>
+              <FormMessage>{state.errors?.sensitivityLevel}</FormMessage>
+            </FormItem>
           </div>
           <SubmitButton />
         </form>
-      </Form>
 
       {state.data && (
         <Card className="mt-6 bg-secondary">

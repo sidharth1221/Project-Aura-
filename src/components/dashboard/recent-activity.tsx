@@ -55,7 +55,7 @@ export function RecentActivity({ data }: RecentActivityProps) {
                 <TableCell>
                   <div className="flex items-center gap-3">
                     <Avatar className="h-9 w-9">
-                        {userAvatar && <AvatarImage src={`https://picsum.photos/seed/avatar${index}/100/100`} alt="Avatar" />}
+                        {userAvatar && <AvatarImage src={`https://picsum.photos/seed/avatar${index}/100/100`} alt={`Avatar of ${activity.user}`} />}
                         <AvatarFallback>{activity.user.substring(0,2)}</AvatarFallback>
                     </Avatar>
                     <div className="font-medium">{activity.user}</div>

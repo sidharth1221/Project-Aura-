@@ -4,31 +4,41 @@
       "id": "user-avatar",
       "description": "User avatar placeholder",
       "imageUrl": "https://images.unsplash.com/photo-1725028748781-7adb1df9a943?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxwZXJzb24lMjBmYWNlfGVufDB8fHx8MTc2MzAwMjIxMnww&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "person face"
+      "imageHint": "person face",
+      "width": 100,
+      "height": 100
     },
     {
       "id": "hero-image",
       "description": "Hero image showing solar panels on a roof",
       "imageUrl": "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxzb2xhciUyMHBhbmVsc3xlbnwwfHx8fDE3NjI5OTk5MDl8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "solar panels"
+      "imageHint": "solar panels",
+      "width": 800,
+      "height": 600
     },
     {
       "id": "feature-1",
       "description": "Abstract data chart visualization",
       "imageUrl": "https://images.unsplash.com/photo-1762427354251-f008b64dbc32?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxkYXRhJTIwY2hhcnR8ZW58MHx8fHwxNzYyOTk0NDE3fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "data chart"
+      "imageHint": "data chart",
+      "width": 600,
+      "height": 400
     },
     {
       "id": "feature-2",
       "description": "Top-down view of a city map",
       "imageUrl": "https://images.unsplash.com/photo-1522678073884-26b1b87526e4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Y2l0eSUyMG1hcHxlbnwwfHx8fDE3NjI5MjY4NDN8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "city map"
+      "imageHint": "city map",
+      "width": 600,
+      "height": 400
     },
     {
       "id": "feature-3",
       "description": "Wind turbines in a field, representing renewable energy",
       "imageUrl": "https://images.unsplash.com/photo-1560279966-2d681f3d4dfc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxyZW5ld2FibGUlMjBlbmVyZ3l8ZW58MHx8fHwxNzYyOTQ2Njc4fDA&ixlib=rb-4.1.0&q=80&w=1080",
-      "imageHint": "renewable energy"
+      "imageHint": "renewable energy",
+      "width": 600,
+      "height": 400
     }
   ]
 }
