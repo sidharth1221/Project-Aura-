@@ -8,7 +8,7 @@ import {
   SidebarInset,
 } from '@/components/ui/sidebar';
 import { SidebarNav } from '@/components/sidebar-nav';
-import { DashboardHeader } from '@/components/components/dashboard-header';
+import { DashboardHeader } from '@/components/dashboard-header';
 import { FirebaseClientProvider, useUser } from '@/firebase';
 import { getApps, initializeApp } from 'firebase/app';
 import { firebaseConfig } from '@/firebase/config';
