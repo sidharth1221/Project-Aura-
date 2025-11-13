@@ -1,6 +1,7 @@
+'use client';
+
 import * as React from 'react';
 import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
 import {
   SidebarProvider,
   Sidebar,
@@ -10,55 +11,9 @@ import {
 import { SidebarNav } from '@/components/sidebar-nav';
 import { DashboardHeader } from '@/components/dashboard-header';
 import { FirebaseClientProvider, useUser } from '@/firebase';
-import { getApps, initializeApp } from 'firebase/app';
-import { firebaseConfig } from '@/firebase/config';
-import { getAuth } from 'firebase/auth';
+import { useRouter } from 'next/navigation';
 
-// This is a workaround to get the user on the server side.
-// In a real app, you'd use a server-side auth library.
-const getInitialUser = async () => {
-  // This is a bit of a hack to check auth on the server.
-  // In a real app, you would have a proper server-side session management.
-  const apps = getApps();
-  if (!apps.length) {
-    initializeApp(firebaseConfig);
-  }
-  const auth = getAuth();
-  // This is not a reliable way to get the current user on the server.
-  // It might be null even if the user is logged in on the client.
-  // For protected routes, middleware is a better approach.
-  return auth.currentUser;
-};
-
-export default function DashboardLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const layout = cookies().get('react-resizable-panels:layout');
-  const defaultLayout = layout ? JSON.parse(layout.value) : undefined;
-  const collapsed = cookies().get('react-resizable-panels:collapsed');
-  const defaultCollapsed = collapsed ? JSON.parse(collapsed.value) : undefined;
-
-  // This is a server-side check.
-  // It's not fully reliable without proper session management.
-  // const user = await getInitialUser();
-  // if (!user) {
-  //   redirect('/login');
-  // }
-  
-  return (
-    <FirebaseClientProvider>
-      <ProtectedDashboardLayout
-        defaultLayout={defaultLayout}
-        defaultCollapsed={defaultCollapsed}
-      >
-        {children}
-      </ProtectedDashboardLayout>
-    </FirebaseClientProvider>
-  );
-}
-
+// This component is now a client component because it uses client-side hooks
 function ProtectedDashboardLayout({
   children,
   defaultLayout,
@@ -102,13 +57,29 @@ function ProtectedDashboardLayout({
   );
 }
 
-function useRouter() {
-  const [router, setRouter] = React.useState({
-    push: (path: string) => {
-      if (typeof window !== 'undefined') {
-        window.location.href = path;
-      }
-    },
-  });
-  return router;
+
+// This remains a server component to read cookies
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  // Reading cookies must be done in a server component.
+  // Since we cannot have both server and client logic in the same file that uses hooks,
+  // we will pass these values as props. In a real app, you might fetch this data differently.
+  const layout = cookies().get('react-resizable-panels:layout');
+  const defaultLayout = layout ? JSON.parse(layout.value) : undefined;
+  const collapsed = cookies().get('react-resizable-panels:collapsed');
+  const defaultCollapsed = collapsed ? JSON.parse(collapsed.value) : undefined;
+  
+  return (
+    <FirebaseClientProvider>
+      <ProtectedDashboardLayout
+        defaultLayout={defaultLayout}
+        defaultCollapsed={defaultCollapsed}
+      >
+        {children}
+      </ProtectedDashboardLayout>
+    </FirebaseClientProvider>
+  );
 }
