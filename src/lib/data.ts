@@ -61,3 +61,14 @@ export const recentActivityData = [
         district: "Northwood",
     },
 ];
+
+export const communityLeaderboardData = [
+    { district: "Northwood", anonymizedUserId: "User-a4b1", production: 1250 },
+    { district: "Southside", anonymizedUserId: "User-c2d3", production: 1180 },
+    { district: "Northwood", anonymizedUserId: "User-e5f6", production: 1120 },
+    { district: "Westend", anonymizedUserId: "User-g7h8", production: 1050 },
+    { district: "Eastgate", anonymizedUserId: "User-i9j0", production: 980 },
+    { district: "Downtown", anonymizedUserId: "User-k1l2", production: 950 },
+    { district: "Southside", anonymizedUserId: "User-m3n4", production: 920 },
+    { district: "Westend", anonymizedUserId: "User-o5p6", production: 880 },
+];

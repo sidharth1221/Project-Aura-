@@ -87,8 +87,8 @@ service cloud.firestore {
      */
     function isUpdatingAllowedFields() {
       let incomingKeys = request.resource.data.keys();
-      let allowedKeys = ['firstName', 'lastName', 'updatedAt'];
-      return incomingKeys.hasAll(allowedKeys) && incomingKeys.size() == 3;
+      let allowedKeys = ['firstName', 'lastName', 'updatedAt', 'energyUsage', 'solarPotential', 'district'];
+      return incomingKeys.hasAll(allowedKeys) || incomingKeys.hasAll(['firstName', 'lastName', 'updatedAt']);
     }
   }
 }

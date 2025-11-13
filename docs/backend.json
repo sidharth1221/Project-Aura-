@@ -23,6 +23,18 @@
           "description": "The user's email address.",
           "format": "email"
         },
+        "district": {
+            "type": "string",
+            "description": "The district the user belongs to."
+        },
+        "energyUsage": {
+            "type": "number",
+            "description": "The user's monthly energy usage in kWh."
+        },
+        "solarPotential": {
+            "type": "number",
+            "description": "The user's estimated yearly solar energy production in kWh."
+        },
         "createdAt": {
           "type": "string",
           "description": "The date and time the user was created.",

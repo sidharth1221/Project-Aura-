@@ -19,6 +19,9 @@ import {
   Settings,
   LifeBuoy,
   User,
+  Zap,
+  Sun,
+  Users
 } from 'lucide-react';
 
 export function SidebarNav() {
@@ -52,6 +55,42 @@ export function SidebarNav() {
               <span>Dashboard</span>
             </Link>
           </SidebarMenuButton>
+        </SidebarMenuItem>
+         <SidebarMenuItem>
+            <SidebarMenuButton
+                asChild
+                isActive={isActive('/dashboard/coach')}
+                tooltip={{ children: 'AI Energy Coach' }}
+            >
+                <Link href="/dashboard/coach">
+                    <Zap />
+                    <span>AI Energy Coach</span>
+                </Link>
+            </SidebarMenuButton>
+        </SidebarMenuItem>
+        <SidebarMenuItem>
+            <SidebarMenuButton
+                asChild
+                isActive={isActive('/dashboard/solar-potential')}
+                tooltip={{ children: 'Solar Potential' }}
+            >
+                <Link href="/dashboard/solar-potential">
+                    <Sun />
+                    <span>Solar Potential</span>
+                </Link>
+            </SidebarMenuButton>
+        </SidebarMenuItem>
+        <SidebarMenuItem>
+            <SidebarMenuButton
+                asChild
+                isActive={isActive('/dashboard/community')}
+                tooltip={{ children: 'Community' }}
+            >
+                <Link href="/dashboard/community">
+                    <Users />
+                    <span>Community</span>
+                </Link>
+            </SidebarMenuButton>
         </SidebarMenuItem>
         <SidebarMenuItem>
           <SidebarMenuButton
