@@ -12,7 +12,7 @@
  * Key Security Decisions:
  * - Users can only create, read, update, and delete their own profiles.
  * - Listing all users is explicitly denied to prevent information leakage.
- * - No schema validation is performed in this prototype to allow for flexible data evolution.
+ * - Schema validation is enforced on update to ensure data integrity.
  *
  * Denormalization for Authorization:
  * The `userId` is part of the path (`/users/{userId}`) and mirrored in the document's `id` field. This denormalization avoids the need for costly `get()` calls to determine user ownership.
@@ -37,7 +37,7 @@ service cloud.firestore {
       allow get: if isOwner(userId);
       allow list: if false; // Listing all users is not permitted.
       allow create: if isNewOwner(userId);
-      allow update: if isExistingOwner(userId);
+      allow update: if isExistingOwner(userId) && isUpdatingAllowedFields();
       allow delete: if isExistingOwner(userId);
     }
 
@@ -79,6 +79,16 @@ service cloud.firestore {
      */
     function isExistingOwner(userId) {
         return isOwner(userId) && resource != null;
+    }
+
+    /**
+     * @description Checks if the user is only updating allowed fields.
+     * @return {bool} True if only allowed fields are being updated.
+     */
+    function isUpdatingAllowedFields() {
+      let incomingKeys = request.resource.data.keys();
+      let allowedKeys = ['firstName', 'lastName', 'updatedAt'];
+      return incomingKeys.hasAll(allowedKeys) && incomingKeys.size() == 3;
     }
   }
 }
