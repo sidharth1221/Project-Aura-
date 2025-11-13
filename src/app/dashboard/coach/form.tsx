@@ -38,13 +38,13 @@ export function EnergyCoachForm() {
 
   useEffect(() => {
     if (state.message && state.message !== 'Analysis successful.') {
-        const errorMessages = 
+        const errorMessages =
             state.errors?.energyUsage?.join(', ') ||
             state.errors?.homeSize?.join(', ') ||
             state.errors?.householdSize?.join(', ') ||
             state.errors?._form?.join(', ') ||
             state.message;
-      
+
         toast({
             variant: 'destructive',
             title: 'Error',

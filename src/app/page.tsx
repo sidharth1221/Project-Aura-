@@ -5,7 +5,7 @@ import { ArrowRight, BarChart, Map, ShieldCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { AuraTwinLogo } from '@/components/icons';
-import { PlaceHolderImages, type ImagePlaceholder } from '@/lib/placeholder-images';
+import { PlaceHolderImages } from '@/lib/placeholder-images';
 import { useEffect, useState } from 'react';
 import { useUser } from '@/firebase';
 
@@ -93,7 +93,8 @@ export default function LandingPage() {
               <Image
                 src={heroImage.imageUrl}
                 alt={heroImage.description}
-                fill
+                width={heroImage.width}
+                height={heroImage.height}
                 className="rounded-xl object-cover shadow-2xl"
                 data-ai-hint={heroImage.imageHint}
                 priority
@@ -113,8 +114,8 @@ export default function LandingPage() {
               </p>
             </div>
             <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
-              {features.map((feature, index) => (
-                <Card key={index} className="flex flex-col">
+              {features.map((feature) => (
+                <Card key={feature.title} className="flex flex-col">
                   <CardHeader className="items-center text-center">
                     <div className="mb-4 rounded-full bg-primary/10 p-3">
                       {feature.icon}

@@ -2,7 +2,6 @@ import {
   kpiData,
   overviewChartData,
   districtChartData,
-  recentActivityData,
 } from '@/lib/data';
 import { KpiCard } from '@/components/dashboard/kpi-card';
 import { OverviewChart } from '@/components/dashboard/overview-chart';
@@ -36,7 +35,7 @@ export default function DashboardPage() {
           </CardContent>
         </Card>
       </div>
-      <RecentActivity data={recentActivityData} />
+      <RecentActivity />
     </div>
   );
 }

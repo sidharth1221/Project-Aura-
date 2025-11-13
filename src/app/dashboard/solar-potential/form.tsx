@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { Bot, Loader2, Sun } from 'lucide-react';
+import { Bot, Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 function SubmitButton() {
@@ -35,11 +35,11 @@ export function SolarPotentialForm() {
 
   useEffect(() => {
     if (state.message && state.message !== 'Analysis successful.') {
-        const errorMessages = 
+        const errorMessages =
             state.errors?.address?.join(', ') ||
             state.errors?._form?.join(', ') ||
             state.message;
-      
+
         toast({
             variant: 'destructive',
             title: 'Error',
