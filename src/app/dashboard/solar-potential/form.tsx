@@ -58,7 +58,7 @@ export function SolarPotentialForm() {
         >
             <div className="space-y-2">
               <Label htmlFor="address">Address</Label>
-                <Input id="address" name="address" defaultValue="1600 Amphitheatre Parkway, Mountain View, CA" placeholder="Enter a full address" />
+                <Input id="address" name="address" defaultValue="Vidhana Soudha, Bengaluru, Karnataka, India" placeholder="Enter a full address" />
               {state.errors?.address && <p className="text-sm font-medium text-destructive">{state.errors.address}</p>}
             </div>
           <SubmitButton />

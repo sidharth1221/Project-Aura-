@@ -22,53 +22,53 @@ export const overviewChartData = [
 
 
 export const districtChartData = [
-    { name: "Northwood", value: 400, "fill": "hsl(var(--chart-1))" },
-    { name: "Southside", value: 300, "fill": "hsl(var(--chart-2))" },
-    { name: "Westend", value: 200, "fill": "hsl(var(--chart-3))" },
-    { name: "Eastgate", value: 278, "fill": "hsl(var(--chart-4))" },
-    { name: "Downtown", value: 189, "fill": "hsl(var(--chart-5))" },
+    { name: "Koramangala", value: 450, "fill": "hsl(var(--chart-1))" },
+    { name: "Indiranagar", value: 380, "fill": "hsl(var(--chart-2))" },
+    { name: "Jayanagar", value: 320, "fill": "hsl(var(--chart-3))" },
+    { name: "Whitefield", value: 280, "fill": "hsl(var(--chart-4))" },
+    { name: "Electronic City", value: 200, "fill": "hsl(var(--chart-5))" },
 ];
 
 export const recentActivityData = [
     {
-        user: "Alex Johnson",
+        user: "Rohan Kumar",
         action: "connected a new solar inverter.",
         timestamp: "5 minutes ago",
-        district: "Northwood",
+        district: "Koramangala",
     },
     {
-        user: "Maria Garcia",
+        user: "Priya Patel",
         action: "generated a Solar API report.",
         timestamp: "1 hour ago",
-        district: "Southside",
+        district: "Indiranagar",
     },
     {
-        user: "Chen Wei",
+        user: "Aditya Singh",
         action: "reached 1MWh of total production.",
         timestamp: "3 hours ago",
-        district: "Westend",
+        district: "Jayanagar",
     },
     {
-        user: "Fatima Al-Sayed",
+        user: "Ananya Rao",
         action: "updated her user profile.",
         timestamp: "1 day ago",
-        district: "Eastgate",
+        district: "Whitefield",
     },
     {
-        user: "David Smith",
+        user: "Vikram Reddy",
         action: "generated a Solar API report.",
         timestamp: "2 days ago",
-        district: "Northwood",
+        district: "Koramangala",
     },
 ];
 
 export const communityLeaderboardData = [
-    { district: "Northwood", anonymizedUserId: "User-a4b1", production: 1250 },
-    { district: "Southside", anonymizedUserId: "User-c2d3", production: 1180 },
-    { district: "Northwood", anonymizedUserId: "User-e5f6", production: 1120 },
-    { district: "Westend", anonymizedUserId: "User-g7h8", production: 1050 },
-    { district: "Eastgate", anonymizedUserId: "User-i9j0", production: 980 },
-    { district: "Downtown", anonymizedUserId: "User-k1l2", production: 950 },
-    { district: "Southside", anonymizedUserId: "User-m3n4", production: 920 },
-    { district: "Westend", anonymizedUserId: "User-o5p6", production: 880 },
+    { district: "Koramangala", anonymizedUserId: "User-a4b1", production: 1250 },
+    { district: "Indiranagar", anonymizedUserId: "User-c2d3", production: 1180 },
+    { district: "Koramangala", anonymizedUserId: "User-e5f6", production: 1120 },
+    { district: "Jayanagar", anonymizedUserId: "User-g7h8", production: 1050 },
+    { district: "Whitefield", anonymizedUserId: "User-i9j0", production: 980 },
+    { district: "Electronic City", anonymizedUserId: "User-k1l2", production: 950 },
+    { district: "Indiranagar", anonymizedUserId: "User-m3n4", production: 920 },
+    { district: "Jayanagar", anonymizedUserId: "User-o5p6", production: 880 },
 ];

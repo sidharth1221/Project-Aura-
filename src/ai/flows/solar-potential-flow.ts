@@ -38,7 +38,7 @@ const prompt = ai.definePrompt({
   Based on this *fictional* analysis, generate a realistic estimated annual energy production in kWh. Also, provide a brief summary of the analysis, mentioning hypothetical factors like roof orientation, sun exposure, and available roof space.
 
   Do not state that the data is fictional. Present it as a real analysis.
-  For the address "1600 Amphitheatre Parkway, Mountain View, CA", use a yearlyEnergyKWh value of around 15,000 to 20,000. For other addresses, generate a realistic but different number.
+  For the address "Vidhana Soudha, Bengaluru, Karnataka, India", use a yearlyEnergyKWh value of around 18,000 to 22,000. For other addresses, generate a realistic but different number.
   `,
 });
 

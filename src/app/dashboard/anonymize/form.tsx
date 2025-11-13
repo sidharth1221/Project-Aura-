@@ -20,10 +20,10 @@ import { Bot, Loader2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const defaultUserData = {
-    "name": "John Doe",
-    "age": 35,
-    "address": "123 Main St",
-    "energy_usage": 750
+    "name": "Priya Sharma",
+    "age": 32,
+    "address": "15th Cross Road, Jayanagar",
+    "energy_usage": 680
 };
 
 function SubmitButton() {
@@ -81,7 +81,7 @@ export function AnonymizeForm() {
                   name="userData"
                   rows={10}
                   defaultValue={JSON.stringify(defaultUserData, null, 2)}
-                  placeholder='{ "name": "John Doe", "age": 35 }'
+                  placeholder='{ "name": "Priya Sharma", "age": 32 }'
                   className="font-mono"
                 />
               {state.errors?.userData && <p className="text-sm font-medium text-destructive">{state.errors.userData}</p>}
@@ -89,7 +89,7 @@ export function AnonymizeForm() {
 
             <div className="space-y-2">
               <Label htmlFor="district">District</Label>
-                <Input id="district" name="district" defaultValue="Downtown" placeholder="e.g., Northwood" />
+                <Input id="district" name="district" defaultValue="Koramangala" placeholder="e.g., Jayanagar" />
               {state.errors?.district && <p className="text-sm font-medium text-destructive">{state.errors.district}</p>}
             </div>
 

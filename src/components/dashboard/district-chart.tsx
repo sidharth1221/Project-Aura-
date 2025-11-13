@@ -15,24 +15,24 @@ const chartConfig = {
   value: {
     label: "Adoption",
   },
-  Northwood: {
-    label: "Northwood",
+  Koramangala: {
+    label: "Koramangala",
     color: "hsl(var(--chart-1))",
   },
-  Southside: {
-    label: "Southside",
+  Indiranagar: {
+    label: "Indiranagar",
     color: "hsl(var(--chart-2))",
   },
-  Westend: {
-    label: "Westend",
+  Jayanagar: {
+    label: "Jayanagar",
     color: "hsl(var(--chart-3))",
   },
-  Eastgate: {
-    label: "Eastgate",
+  Whitefield: {
+    label: "Whitefield",
     color: "hsl(var(--chart-4))",
   },
-  Downtown: {
-    label: "Downtown",
+  'Electronic City': {
+    label: "Electronic City",
     color: "hsl(var(--chart-5))",
   },
 } satisfies ChartConfig;
@@ -54,7 +54,7 @@ export function DistrictChart({ data }: DistrictChartProps) {
           <YAxis 
             type="category" 
             dataKey="name" 
-            width={60}
+            width={80}
             tickLine={false}
             axisLine={false}
             tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12 }}
@@ -65,7 +65,7 @@ export function DistrictChart({ data }: DistrictChartProps) {
           />
           <Bar dataKey="value" radius={[0, 4, 4, 0]}>
             {data.map((entry) => (
-                <Cell key={entry.name} fill={entry.fill} />
+                <Cell key={`cell-${entry.name}`} fill={entry.fill} />
             ))}
           </Bar>
         </BarChart>
