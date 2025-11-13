@@ -1,6 +1,7 @@
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
+import { useActionState, useEffect } from 'react';
+import { useFormStatus } from 'react-dom';
 import { submitAnonymizationRequest, FormState } from './actions';
 import { Button } from '@/components/ui/button';
 import {
@@ -27,7 +28,6 @@ import { Bot, Loader2 } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect } from 'react';
 import { useToast } from '@/hooks/use-toast';
 
 const FormSchema = z.object({
@@ -55,7 +55,7 @@ function SubmitButton() {
 
 export function AnonymizeForm() {
   const initialState: FormState = { message: '' };
-  const [state, formAction] = useFormState(submitAnonymizationRequest, initialState);
+  const [state, formAction] = useActionState(submitAnonymizationRequest, initialState);
   const { toast } = useToast();
 
   const form = useForm<z.infer<typeof FormSchema>>({
