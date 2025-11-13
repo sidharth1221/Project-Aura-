@@ -82,7 +82,7 @@ export function AnonymizeForm() {
                   rows={10}
                   defaultValue={JSON.stringify(defaultUserData, null, 2)}
                   placeholder='{ "name": "John Doe", "age": 35 }'
-                  className="font-code"
+                  className="font-mono"
                 />
               {state.errors?.userData && <p className="text-sm font-medium text-destructive">{state.errors.userData}</p>}
             </div>
@@ -131,7 +131,7 @@ export function AnonymizeForm() {
             </Alert>
             <div>
               <h4 className="font-semibold">Anonymized Data:</h4>
-              <pre className="mt-2 rounded-md bg-background p-4 text-sm font-code">
+              <pre className="mt-2 rounded-md bg-background p-4 text-sm font-mono">
                 <code>
                   {JSON.stringify(state.data.anonymizedData, null, 2)}
                 </code>

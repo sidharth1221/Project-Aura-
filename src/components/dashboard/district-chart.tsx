@@ -1,6 +1,6 @@
 'use client';
 
-import { Bar, BarChart, XAxis, YAxis, ResponsiveContainer, Tooltip } from 'recharts';
+import { Bar, BarChart, XAxis, YAxis, ResponsiveContainer, Tooltip, Cell } from 'recharts';
 import {
   ChartContainer,
   ChartTooltipContent,
@@ -65,7 +65,7 @@ export function DistrictChart({ data }: DistrictChartProps) {
           />
           <Bar dataKey="value" radius={[0, 4, 4, 0]}>
             {data.map((entry) => (
-                <div key={entry.name} />
+                <Cell key={entry.name} fill={entry.fill} />
             ))}
           </Bar>
         </BarChart>

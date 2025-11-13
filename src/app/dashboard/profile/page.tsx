@@ -1,12 +1,12 @@
 'use client';
 
-import { useUser, useFirestore } from '@/firebase';
+import { useUser, useFirestore, useMemoFirebase } from '@/firebase';
 import { useDoc } from '@/firebase/firestore/use-doc';
-import { doc, updateDoc } from 'firebase/firestore';
+import { doc } from 'firebase/firestore';
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -31,7 +31,7 @@ export default function ProfilePage() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
-  const userDocRef = useMemo(() => {
+  const userDocRef = useMemoFirebase(() => {
     if (firestore && user) {
       return doc(firestore, 'users', user.uid);
     }
@@ -41,10 +41,10 @@ export default function ProfilePage() {
   const { data: userProfile, isLoading: isProfileLoading } = useDoc(userDocRef);
 
   // Update local state when userProfile data is fetched
-  useMemo(() => {
+  useEffect(() => {
     if (userProfile) {
-      setFirstName(userProfile.firstName);
-      setLastName(userProfile.lastName);
+      setFirstName(userProfile.firstName || '');
+      setLastName(userProfile.lastName || '');
     }
   }, [userProfile]);
 

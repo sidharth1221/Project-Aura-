@@ -133,7 +133,7 @@ export default function LandingPage() {
 
       <footer className="bg-background py-6">
         <div className="container mx-auto px-4 text-center text-sm text-muted-foreground">
-          &copy; {year || '...'} AuraTwin. All rights reserved.
+          &copy; {year || new Date().getFullYear()} AuraTwin. All rights reserved.
         </div>
       </footer>
     </div>

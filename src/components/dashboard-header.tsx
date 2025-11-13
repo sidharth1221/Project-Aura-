@@ -23,8 +23,10 @@ import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { useTheme } from 'next-themes';
-import React, { useEffect, useState } from 'react';
-import { useAuth, useUser } from '@/firebase';
+import React, { useEffect, useState, useMemo } from 'react';
+import { useAuth, useUser, useFirestore } from '@/firebase';
+import { useDoc } from '@/firebase/firestore/use-doc';
+import { doc } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 
@@ -32,16 +34,27 @@ export function DashboardHeader() {
   const { setTheme, theme } = useTheme();
   const { user } = useUser();
   const auth = useAuth();
+  const firestore = useFirestore();
   const router = useRouter();
   
-  const [mounted, setMounted] = useState(false)
-  useEffect(() => setMounted(true), [])
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  const userDocRef = useMemo(() => {
+    if (firestore && user) {
+      return doc(firestore, 'users', user.uid);
+    }
+    return undefined;
+  }, [firestore, user]);
+
+  const { data: userProfile } = useDoc(userDocRef);
 
   const handleLogout = async () => {
     await signOut(auth);
     router.push('/login');
   };
 
+  const displayName = userProfile ? `${userProfile.firstName} ${userProfile.lastName}` : user?.email;
 
   return (
     <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
@@ -80,17 +93,17 @@ export function DashboardHeader() {
                 {user?.photoURL && (
                   <AvatarImage
                     src={user.photoURL}
-                    alt={user.displayName || 'User avatar'}
+                    alt={displayName || 'User avatar'}
                   />
                 )}
-                <AvatarFallback>{user?.email?.[0].toUpperCase()}</AvatarFallback>
+                <AvatarFallback>{userProfile?.firstName?.[0]}{userProfile?.lastName?.[0]}</AvatarFallback>
               </Avatar>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56" align="end" forceMount>
             <DropdownMenuLabel className="font-normal">
               <div className="flex flex-col space-y-1">
-                <p className="text-sm font-medium leading-none">{user?.displayName || 'User'}</p>
+                <p className="text-sm font-medium leading-none">{displayName}</p>
                 <p className="text-xs leading-none text-muted-foreground">
                   {user?.email}
                 </p>

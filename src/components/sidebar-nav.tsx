@@ -18,7 +18,6 @@ import {
   ShieldCheck,
   Settings,
   LifeBuoy,
-  User,
   Zap,
   Sun,
   Users
@@ -101,18 +100,6 @@ export function SidebarNav() {
             <Link href="/dashboard/anonymize">
               <ShieldCheck />
               <span>Anonymize Data</span>
-            </Link>
-          </SidebarMenuButton>
-        </SidebarMenuItem>
-         <SidebarMenuItem>
-          <SidebarMenuButton
-            asChild
-            isActive={isActive('/dashboard/profile')}
-            tooltip={{ children: 'User Profile' }}
-          >
-            <Link href="/dashboard/profile">
-              <User />
-              <span>Profile</span>
             </Link>
           </SidebarMenuButton>
         </SidebarMenuItem>
