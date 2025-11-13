@@ -4,13 +4,7 @@ import { useActionState, useEffect, useRef } from 'react';
 import { useFormStatus } from 'react-dom';
 import { submitAnonymizationRequest, FormState } from './actions';
 import { Button } from '@/components/ui/button';
-import {
-  Form,
-  FormControl,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
+import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import {
@@ -80,47 +74,42 @@ export function AnonymizeForm() {
             className="space-y-6"
         >
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <FormItem className="md:col-span-2">
-              <FormLabel>User Data (JSON)</FormLabel>
-              <FormControl>
+            <div className="space-y-2 md:col-span-2">
+              <Label htmlFor="userData">User Data (JSON)</Label>
                 <Textarea
+                  id="userData"
                   name="userData"
                   rows={10}
                   defaultValue={JSON.stringify(defaultUserData, null, 2)}
                   placeholder='{ "name": "John Doe", "age": 35 }'
                   className="font-code"
                 />
-              </FormControl>
-              <FormMessage>{state.errors?.userData}</FormMessage>
-            </FormItem>
+              {state.errors?.userData && <p className="text-sm font-medium text-destructive">{state.errors.userData}</p>}
+            </div>
 
-            <FormItem>
-              <FormLabel>District</FormLabel>
-              <FormControl>
-                <Input name="district" defaultValue="Downtown" placeholder="e.g., Northwood" />
-              </FormControl>
-              <FormMessage>{state.errors?.district}</FormMessage>
-            </FormItem>
+            <div className="space-y-2">
+              <Label htmlFor="district">District</Label>
+                <Input id="district" name="district" defaultValue="Downtown" placeholder="e.g., Northwood" />
+              {state.errors?.district && <p className="text-sm font-medium text-destructive">{state.errors.district}</p>}
+            </div>
 
-            <FormItem>
-              <FormLabel>Sensitivity Level</FormLabel>
+            <div className="space-y-2">
+              <Label>Sensitivity Level</Label>
               <Select
                 name="sensitivityLevel"
                 defaultValue="medium"
               >
-                <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder="Select a sensitivity level" />
                   </SelectTrigger>
-                </FormControl>
                 <SelectContent>
                   <SelectItem value="low">Low</SelectItem>
                   <SelectItem value="medium">Medium</SelectItem>
                   <SelectItem value="high">High</SelectItem>
                 </SelectContent>
               </Select>
-              <FormMessage>{state.errors?.sensitivityLevel}</FormMessage>
-            </FormItem>
+              {state.errors?.sensitivityLevel && <p className="text-sm font-medium text-destructive">{state.errors.sensitivityLevel}</p>}
+            </div>
           </div>
           <SubmitButton />
         </form>
