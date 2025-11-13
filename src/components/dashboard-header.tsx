@@ -8,6 +8,7 @@ import {
   Moon,
   Sun,
   User as UserIcon,
+  Award
 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import {
@@ -24,11 +25,12 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { useTheme } from 'next-themes';
 import React, { useEffect, useState, useMemo } from 'react';
-import { useAuth, useUser, useFirestore } from '@/firebase';
+import { useAuth, useUser, useFirestore, useMemoFirebase } from '@/firebase';
 import { useDoc } from '@/firebase/firestore/use-doc';
 import { doc } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
+import { Skeleton } from './ui/skeleton';
 
 export function DashboardHeader() {
   const { setTheme, theme } = useTheme();
@@ -40,14 +42,14 @@ export function DashboardHeader() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-  const userDocRef = useMemo(() => {
+  const userDocRef = useMemoFirebase(() => {
     if (firestore && user) {
       return doc(firestore, 'users', user.uid);
     }
     return undefined;
   }, [firestore, user]);
 
-  const { data: userProfile } = useDoc(userDocRef);
+  const { data: userProfile, isLoading: isProfileLoading } = useDoc(userDocRef);
 
   const handleLogout = async () => {
     await signOut(auth);
@@ -55,6 +57,7 @@ export function DashboardHeader() {
   };
 
   const displayName = userProfile ? `${userProfile.firstName} ${userProfile.lastName}` : user?.email;
+  const auraPoints = userProfile?.auraPoints ?? 0;
 
   return (
     <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
@@ -86,6 +89,14 @@ export function DashboardHeader() {
             <span className="sr-only">Toggle theme</span>
           </Button>
         )}
+        <div className="flex items-center gap-2">
+          <Award className="h-5 w-5 text-yellow-500" />
+          {isProfileLoading ? (
+            <Skeleton className="h-5 w-10" />
+          ) : (
+            <span className="font-bold">{auraPoints.toLocaleString()}</span>
+          )}
+        </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="relative h-8 w-8 rounded-full">

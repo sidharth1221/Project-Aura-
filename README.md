@@ -5,6 +5,9 @@ AuraTwin is a Next.js web application designed to model, visualize, and encourag
 ## ✨ Features
 
 - **Authentication**: Secure user sign-up and login functionality using Firebase Authentication.
+- **Gamification System**:
+    - **Aura Points**: Users earn points for engaging in eco-friendly activities.
+    - **Missions**: A dedicated page where users can complete challenges (e.g., "Reduce energy use by 5%") to earn Aura Points and climb the leaderboard.
 - **User Dashboard**: A central hub for users to view key metrics, charts, and recent activity related to energy production and potential.
 - **AI Energy Coach**: An AI-powered assistant that analyzes user-provided data (energy usage, home size) and provides personalized, actionable recommendations for energy conservation.
 - **AI Solar Potential Estimator**: Utilizes an AI flow to simulate a solar analysis for a given address, estimating annual energy production and providing a summary.
@@ -56,7 +59,6 @@ This project follows a structure conventional for Next.js applications using the
 │   ├── hooks/            # General-purpose React hooks.
 │   └── lib/              # Utility functions, static data, etc.
 │       ├── data.ts       # Mock data for dashboard charts and tables.
-│       ├── utils.ts      # Utility functions (e.g., `cn` for classnames).
 │       └── ...
 ├── .env                  # Environment variables.
 ├── apphosting.yaml       # Firebase App Hosting deployment config.

@@ -35,6 +35,10 @@
             "type": "number",
             "description": "The user's estimated yearly solar energy production in kWh."
         },
+        "auraPoints": {
+            "type": "number",
+            "description": "The user's gamification points."
+        },
         "createdAt": {
           "type": "string",
           "description": "The date and time the user was created.",
@@ -54,6 +58,23 @@
         "createdAt",
         "updatedAt"
       ]
+    },
+    "Mission": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "Mission",
+      "type": "object",
+      "description": "Represents a challenge a user can complete for points.",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The description of the mission."
+        },
+        "reward": {
+          "type": "number",
+          "description": "The number of Aura Points awarded for completing the mission."
+        }
+      },
+      "required": ["title", "reward"]
     }
   },
   "auth": {
@@ -77,6 +98,16 @@
               "description": "The Firebase Auth UID of the user."
             }
           ]
+        }
+      },
+      {
+        "path": "/missions/{missionId}",
+        "definition": {
+            "entityName": "Mission",
+            "schema": {
+                "$ref": "#/backend/entities/Mission"
+            },
+            "description": "Stores available missions for users."
         }
       }
     ]

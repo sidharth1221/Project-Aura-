@@ -20,7 +20,8 @@ import {
   LifeBuoy,
   Zap,
   Sun,
-  Users
+  Users,
+  Award
 } from 'lucide-react';
 
 export function SidebarNav() {
@@ -76,6 +77,18 @@ export function SidebarNav() {
                 <Link href="/dashboard/solar-potential">
                     <Sun />
                     <span>Solar Potential</span>
+                </Link>
+            </SidebarMenuButton>
+        </SidebarMenuItem>
+        <SidebarMenuItem>
+            <SidebarMenuButton
+                asChild
+                isActive={isActive('/dashboard/missions')}
+                tooltip={{ children: 'Missions' }}
+            >
+                <Link href="/dashboard/missions">
+                    <Award />
+                    <span>Missions</span>
                 </Link>
             </SidebarMenuButton>
         </SidebarMenuItem>
