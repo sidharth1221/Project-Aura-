@@ -2,17 +2,30 @@
 
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import {
+  ChartContainer,
   ChartTooltipContent,
+  ChartConfig,
 } from "@/components/ui/chart"
 
 interface OverviewChartProps {
   data: { name: string; actual: number; potential: number }[];
 }
 
+const chartConfig = {
+  actual: {
+    label: "Actual",
+    color: "hsl(var(--chart-1))",
+  },
+  potential: {
+    label: "Potential",
+    color: "hsl(var(--chart-2))",
+  },
+} satisfies ChartConfig
+
 export function OverviewChart({ data }: OverviewChartProps) {
   return (
     <div className="h-[350px] w-full">
-        <ResponsiveContainer width="100%" height="100%">
+        <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
             <AreaChart data={data} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
                 <defs>
                     <linearGradient id="colorActual" x1="0" y1="0" x2="0" y2="1">
@@ -44,7 +57,7 @@ export function OverviewChart({ data }: OverviewChartProps) {
                 <Area type="monotone" dataKey="actual" stroke="hsl(var(--primary))" fillOpacity={1} fill="url(#colorActual)" />
                 <Area type="monotone" dataKey="potential" stroke="hsl(var(--accent))" fillOpacity={1} fill="url(#colorPotential)" />
             </AreaChart>
-        </ResponsiveContainer>
+        </ChartContainer>
     </div>
   );
 }
