@@ -22,7 +22,7 @@ import { useToast } from '@/hooks/use-toast';
 const defaultUserData = {
     "name": "Priya Sharma",
     "age": 32,
-    "address": "15th Cross Road, Jayanagar",
+    "address": "15th Cross Road, Jayanagar, Bengaluru",
     "energy_usage": 680
 };
 
@@ -89,7 +89,7 @@ export function AnonymizeForm() {
 
             <div className="space-y-2">
               <Label htmlFor="district">District</Label>
-                <Input id="district" name="district" defaultValue="Koramangala" placeholder="e.g., Jayanagar" />
+                <Input id="district" name="district" defaultValue="Jayanagar" placeholder="e.g., Jayanagar" />
               {state.errors?.district && <p className="text-sm font-medium text-destructive">{state.errors.district}</p>}
             </div>
 

@@ -26,40 +26,7 @@ export const districtChartData = [
     { name: "Indiranagar", value: 380, "fill": "hsl(var(--chart-2))" },
     { name: "Jayanagar", value: 320, "fill": "hsl(var(--chart-3))" },
     { name: "Whitefield", value: 280, "fill": "hsl(var(--chart-4))" },
-    { name: "Electronic City", value: 200, "fill": "hsl(var(--chart-5))" },
-];
-
-export const recentActivityData = [
-    {
-        user: "Rohan Kumar",
-        action: "connected a new solar inverter.",
-        timestamp: "5 minutes ago",
-        district: "Koramangala",
-    },
-    {
-        user: "Priya Patel",
-        action: "generated a Solar API report.",
-        timestamp: "1 hour ago",
-        district: "Indiranagar",
-    },
-    {
-        user: "Aditya Singh",
-        action: "reached 1MWh of total production.",
-        timestamp: "3 hours ago",
-        district: "Jayanagar",
-    },
-    {
-        user: "Ananya Rao",
-        action: "updated her user profile.",
-        timestamp: "1 day ago",
-        district: "Whitefield",
-    },
-    {
-        user: "Vikram Reddy",
-        action: "generated a Solar API report.",
-        timestamp: "2 days ago",
-        district: "Koramangala",
-    },
+    { name: "HSR Layout", value: 200, "fill": "hsl(var(--chart-5))" },
 ];
 
 export const communityLeaderboardData = [
@@ -68,7 +35,7 @@ export const communityLeaderboardData = [
     { district: "Koramangala", anonymizedUserId: "User-e5f6", production: 1120 },
     { district: "Jayanagar", anonymizedUserId: "User-g7h8", production: 1050 },
     { district: "Whitefield", anonymizedUserId: "User-i9j0", production: 980 },
-    { district: "Electronic City", anonymizedUserId: "User-k1l2", production: 950 },
+    { district: "HSR Layout", anonymizedUserId: "User-k1l2", production: 950 },
     { district: "Indiranagar", anonymizedUserId: "User-m3n4", production: 920 },
     { district: "Jayanagar", anonymizedUserId: "User-o5p6", production: 880 },
 ];

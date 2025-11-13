@@ -31,6 +31,14 @@ export default function RegisterPage() {
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!firestore) {
+        toast({
+            variant: 'destructive',
+            title: 'Error',
+            description: 'Database not available. Please try again later.',
+        });
+        return;
+    }
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -50,7 +58,7 @@ export default function RegisterPage() {
         updatedAt: new Date().toISOString(),
       };
       
-      setDocumentNonBlocking(userDocRef, userData, { merge: true });
+      setDocumentNonBlocking(userDocRef, userData, { merge: false });
 
       toast({
         title: 'Account created',
@@ -68,8 +76,8 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <Card className="mx-auto max-w-sm">
+    <div className="flex min-h-screen items-center justify-center bg-background p-4">
+      <Card className="mx-auto w-full max-w-sm">
         <CardHeader>
           <CardTitle className="text-xl">Sign Up</CardTitle>
           <CardDescription>

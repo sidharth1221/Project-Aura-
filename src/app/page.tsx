@@ -77,7 +77,7 @@ export default function LandingPage() {
             <p className="mx-auto max-w-[700px] text-lg text-muted-foreground md:mx-0">
               AuraTwin is a revolutionary platform that models and visualizes renewable energy adoption, providing homeowners and policymakers with actionable insights for a sustainable tomorrow.
             </p>
-            <div className="flex justify-center gap-4 md:justify-start">
+            <div className="flex flex-col justify-center gap-4 sm:flex-row md:justify-start">
               <Button size="lg" asChild>
                 <Link href="/dashboard">
                   Explore the Dashboard <ArrowRight className="ml-2 h-4 w-4" />

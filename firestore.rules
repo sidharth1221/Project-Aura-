@@ -62,7 +62,7 @@ service cloud.firestore {
       // Defines all fields a user is permitted to update on their profile.
       let allowedKeys = ['firstName', 'lastName', 'updatedAt', 'energyUsage', 'solarPotential', 'district', 'auraPoints'];
       let basicUpdateKeys = ['firstName', 'lastName', 'updatedAt'];
-      return incomingKeys.hasAll(allowedKeys) || incomingKeys.hasAll(basicUpdateKeys);
+      return incomingKeys.hasAll(allowedKeys) || incomingKeys.hasAll(basicUpdateKeys) || incomingKeys.hasAll(['auraPoints']);
     }
   }
 }

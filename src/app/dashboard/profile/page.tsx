@@ -40,7 +40,6 @@ export default function ProfilePage() {
 
   const { data: userProfile, isLoading: isProfileLoading } = useDoc(userDocRef);
 
-  // Update local state when userProfile data is fetched
   useEffect(() => {
     if (userProfile) {
       setFirstName(userProfile.firstName || '');
